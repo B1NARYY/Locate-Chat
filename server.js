@@ -6,7 +6,7 @@ const WebSocket = require('ws');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = 8080; // důležité pro proxy
 
 // === Middleware ===
 app.use(cors());
@@ -26,7 +26,6 @@ db.connect(err => {
   else console.log('Connected to MySQL');
 });
 
-// === Zpřístupnění připojení v celé aplikaci ===
 app.set('db', db);
 
 // === Import routes ===
@@ -34,15 +33,13 @@ const chatroomRoutes = require('./routes/chatroom.routes');
 const locationRoutes = require('./routes/location.routes');
 const authRoutes = require('./routes/auth.routes');
 
-// === Server ===
+// === Spuštění HTTP serveru ===
 const server = app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
 
-// === WebSocket ===
+// === WebSocket server ===
 const wss = new WebSocket.Server({ server });
-
-// Zde je správně až po vytvoření wss:
 app.set('wss', wss);
 
 wss.on('connection', (ws) => {
@@ -61,22 +58,19 @@ wss.on('connection', (ws) => {
   });
 });
 
-// === Message routes musí být volána jako funkce s wss ===
+// === Message routes (předáváme instanci wss) ===
 const messageRoutes = require('./routes/message.routes')(wss);
 
 // === API routes ===
 app.use('/api/chatrooms', chatroomRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/locations', locationRoutes);
-app.use('/api', authRoutes); // login, register, etc.
+app.use('/api', authRoutes);
 
-// === Static files – až po API routách ===
+// === Static files ===
 app.use(express.static(path.join(__dirname, 'public')));
 
-// === Fallback pro neexistující API ===
-app.use('/api/*', (req, res) => {
-  res.status(404).json({ message: 'API endpoint not found' });
+// === Fallback – redirect vše mimo /api na frontend (např. pro index.html) ===
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
-
-// === Export WebSocket instance (volitelně) ===
-module.exports = { app, server, wss };
