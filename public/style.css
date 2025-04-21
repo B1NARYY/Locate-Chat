@@ -1,0 +1,513 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f2f4f8;
+  color: #333;
+}
+
+/* Obecné kontejnery */
+.container,
+.auth-card,
+#index-container,
+.chat-card {
+  max-width: 500px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 15px;
+}
+
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.auth-link,
+.info-link {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-link a,
+.info-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.auth-link a:hover,
+.info-link a:hover {
+  text-decoration: underline;
+}
+
+/* Chatrooms List */
+#chatrooms {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#chatrooms li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+#chatrooms li:hover {
+  background-color: #f0f4fa;
+  transform: translateX(4px);
+}
+
+
+
+#create-room input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+#create-room button {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  background-color: #28a745;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#create-room button:hover {
+  background-color: #1e7e34;
+}
+
+
+/* Chat Room Layout */
+#room-name {
+  text-align: center;
+  margin-top: 30px;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.room-layout {
+  display: flex;
+  gap: 20px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.chat-panel {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+#message-form {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  align-items: center;
+}
+
+#message-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  min-width: 0;
+}
+
+#message-form button {
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+  max-width: 150px;
+}
+
+#message-form button:hover {
+  background-color: #0056b3;
+}
+
+.map-panel {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 500px;
+  position: relative;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+#share-location-btn:hover {
+  background-color: #1e7e34;
+}
+
+@media (max-width: 768px) {
+  .room-layout {
+    flex-direction: column;
+  }
+
+  .map-panel {
+    width: 100%;
+    height: 400px;
+    margin-top: 16px;
+  }
+
+  #map {
+    height: 400px;
+    width: 100%;
+  }
+}
+
+
+.message {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  border-radius: 10px;
+  margin: 5px;
+  display: inline-block;
+  max-width: 70%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+
+.my-message {
+  background-color: #e1f5fe;
+  text-align: right;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.other-message {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+}
+
+
+
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.small-btn {
+  background-color: white;
+  color: #007bff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.small-btn:hover {
+  background-color: #e6e6e6;
+}
+
+.top-bar {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-bar button {
+  background-color: white;
+  color: #007bff;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+}
+.modal button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  font-weight: bold;
+}
+
+.top-bar .right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-bar .username {
+  font-weight: bold;
+}
+
+#create-room select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.map-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+#messages {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 14px;
+  height: 400px; /* Fixní výška */
+  overflow-y: auto; /* Vnitřní scrollování */
+  flex-shrink: 0; /* Zabrání zmenšení */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+
+#messages::-webkit-scrollbar {
+  width: 8px;
+}
+#messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+#messages::-webkit-scrollbar-thumb {
+  background: #888;
+}
+#messages::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+.room-header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#room-code {
+  margin-top: -10px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.leaflet-popup-content {
+  font-size: 12px;
+  margin: 4px 6px;
+}
+
+.leaflet-tooltip.username-tooltip {
+  font-size: 12px;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.location-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+#share-location-btn,
+#auto-share-btn {
+  flex: 1;
+  background-color: #28a745; /* zelené jako předtím */
+  border: none;
+  padding: 14px;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  min-width: 0;
+  transition: background-color 0.2s;
+}
+
+#share-location-btn:hover,
+#auto-share-btn:hover {
+  background-color: #1e7e34;
+}
+
+#auto-share-btn.active {
+  background-color: #dc3545;
+}
+
+.chat-card input[type="text"],
+.chat-card select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+.chat-card button {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#my-room-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+#my-room-list li {
+  padding: 10px 14px;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-room-btn {
+  all: unset;
+  display: inline-block;
+  width: auto !important;
+  height: auto;
+  padding: 2px 6px;
+  margin-left: 10px;
+  margin-top: 2px;                 /* posunutí níž */
+  color: #c62828;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.delete-room-btn:hover {
+  color: white;
+  background-color: #007bff;       /* modré pozadí při hoveru */
+}
+
+.auth-header {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.auth-logo {
+  width: 100px; /* původně 60px */
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+

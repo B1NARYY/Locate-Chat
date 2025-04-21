@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <title>Chat Room</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+</head>
+<body>
+  <div class="top-bar">
+    <div class="left">
+      Logged in as: <span class="username" id="current-user"></span>
+    </div>
+    <div class="right">
+      <a href="index.html" class="nav-link">Rooms</a>
+      <button id="logout-btn" class="small-btn">Logout</button>
+    </div>
+  </div>
+
+  <div class="room-header">
+    <h2 id="room-name">Chat Room</h2>
+    <p id="room-code" class="room-code"></p>
+  </div>
+
+  <div class="room-layout">
+    <div class="chat-panel">
+      <div id="messages"></div>
+      <form id="message-form">
+        <input type="text" id="message-input" placeholder="Type your message..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <div class="map-wrapper">
+      <div class="map-panel">
+        <div id="map">Loading map...</div>
+      </div>
+      <div class="location-buttons">
+        <button id="share-location-btn">Share My Location</button>
+        <button id="auto-share-btn">Auto-Share</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="room.chat.js"></script>
+  <script src="room.map.js"></script>
+  <script>
+    const user = localStorage.getItem("username");
+    if (user) {
+      const userEl = document.getElementById("current-user");
+      if (userEl) userEl.textContent = user;
+    }
+
+    const logoutBtn = document.getElementById("logout-btn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        localStorage.clear();
+        window.location.href = "login.html";
+      });
+    }
+  </script>
+</body>
+</html>
